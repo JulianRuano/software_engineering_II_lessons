@@ -5,6 +5,8 @@
 - [Interfaces Segregation](./interfacesegregation.md)
 - [Dependency Injection](./dependencyInjection.md)
 
+hi, i'm Freider Escobar
+
 
 ---
 [Back to Index](../../README.md)
