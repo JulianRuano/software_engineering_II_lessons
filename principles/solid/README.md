@@ -6,6 +6,7 @@
 - [Dependency Injection](./dependencyInjection.md)
 
 hi, i'm Freider Escobar
+hi, i'm Julian Ruano
 
 
 ---
