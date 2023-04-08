@@ -114,5 +114,6 @@ public class Main {
     }
 }
 ```
-![Imagen Uml](https://res.cloudinary.com/dzxhdnqm4/image/upload/v1680987010/UML_Factory_1_kaz7w8.png)
+
+![Imagen Uml](https://res.cloudinary.com/dzxhdnqm4/image/upload/v1680996327/UML_Factory_2_siieqw.png)
 The main class Main creates different types of files using the FileFactory class, and calls the open(), save(), and close() operations on each. In this way, the Factory pattern is used to create different file objects according to the file type.
