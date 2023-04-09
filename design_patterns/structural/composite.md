@@ -4,7 +4,7 @@ The Composite pattern is a software design pattern used to create hierarchies of
 
 The main purpose of the Composite pattern is to treat individual objects and compositions of objects in the same way. This means that clients using the composite object do not need to worry about whether they are working with an individual object or a composition of objects.
 
-An example of the Factory pattern using Java code could be:
+An example of the Composite pattern using Java code could be:
 
 ```java
     public interface MenuComponent {
@@ -112,6 +112,6 @@ public class MenuDemo {
 Finally, we can use these classes to create a menu that has both individual items and composite items.
 
 <p align="center">
-<img src="https://res.cloudinary.com/dzxhdnqm4/image/upload/v1681005367/UML_Composite_aqcqxr.png" alt="mypic" width="50%">
+<img src="https://res.cloudinary.com/dzxhdnqm4/image/upload/v1681005367/UML_Composite_aqcqxr.png" alt="uml-composite" width="60%">
 </p>
 In short, the Composite pattern uses aggregation to build hierarchical structures of composite objects and simplify the handling of individual and composite items in the same way. In the example, the Menu class uses aggregation to build a list of MenuComponent objects to handle both individual and composite menu items.
