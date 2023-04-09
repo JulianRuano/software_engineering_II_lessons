@@ -45,16 +45,31 @@ Upon completion of this course, you should be able to:
 - [Online Moodle Course](http://univirtual.unicauca.edu.co/moodle/course/view.php?id=2234)
 - [Refactoring Guru](https://refactoring.guru/es)
 - [Martin Fowler's website](https://martinfowler.com/)
+- [Learn Git Branching](https://learngitbranching.js.org/)
 
 ### Lessons
 - [General Programming Principles](principles/general/README.md)
 - [SOLID Principles](principles/solid/README.md)
 - [Maven](maven/README.md)
 - [Git](git/README.md)
+- [Design patterns](design_patterns/README.md)
+  - [Structural patterns](design_patterns/structural/README.md)
+    - [Decorator](design_patterns/structural/decorator.md)
 
 ## How to Contribute
 
+If you want to contribute to this Repo, you must follow the next steps:
 
+1. Request access to the owner `@zahydo`.
+2. Clone the repo: `git clone https://github.com/zahydo/software_engineering_II_lessons`
+3. Create a new branch with your contributions: `git checkout -b feature/name_lastName/solid`
+4. Commit your changes in the new branch: `git add .`, `git commit -m "descriptive commit message"`
+5. Always pull the last changes from the `main` branch: `git pull --rebase origin main`
+6. Resolve possible conflicts.
+7. Push your branch to the remote: `git push -f origin feature/name_lastName/solid`
+8. Create a PR with your new branch in the remote. Follow the next steps: [Tutorial](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
+9. Add the owner as a Reviewer `@zahydo`
+10. Wait for comments. Update the branch with the requested changes (if there are).
 
 ## Author
 
