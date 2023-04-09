@@ -10,7 +10,7 @@ This pattern facilitates the creation of objects without exposing the creation l
 
 ## 😟 Problem
 
-Imagine you are developing an application to manage different types of files. Every time you want to create a file object (TextFile, ImageFile, AudioFile), you would have to instantiate the concrete class directly.
+Imagine you are developing an application to manage different types of files. Every time you want to create a file object (`TextFile`, `ImageFile`, `AudioFile`), you would have to instantiate the concrete class directly.
 
 ```java
 public interface File {
@@ -96,7 +96,7 @@ This approach makes your application highly coupled to the concrete classes, whi
 
 ## 🙂 Solution
 
-To address this issue, the Factory pattern can be used to create objects of different file types without directly instantiating the concrete classes. Instead, a separate factory class (FileFactory) will be responsible for creating objects of the concrete classes based on the given input.
+To address this issue, the Factory pattern can be used to create objects of different file types without directly instantiating the concrete classes. Instead, a separate factory class `FileFactory` will be responsible for creating objects of the concrete classes based on the given input.
 
 This approach promotes loose coupling, making the code more flexible and easier to maintain.
 
@@ -162,7 +162,7 @@ public class AudioFile implements File {
 
 In this example, it needs to create different objects of different File subclasses at runtime without coupling the code to specific concrete classes.
 
-The File interface defines the operations required to open, save, and close a file, and there are three concrete classes that implement the interface: TextFile, ImageFile, and AudioFile.
+The File interface defines the operations required to open, save, and close a file, and there are three concrete classes that implement the interface: `TextFile`, `ImageFile`, and `AudioFile`.
 
 ```java
 // FileFactory class
@@ -181,9 +181,9 @@ public class FileFactory {
 }
 ```
 
-The FileFactory class is responsible for creating objects from the subclasses of File according to the type of file required.
+The `FileFactory` class is responsible for creating objects from the subclasses of File according to the type of file required.
 
-Thus, the Factory pattern creates a File interface, concrete subclasses (TextFile, ImageFile, AudioFile), and a FileFactory class to manage object creation. This results in more modular, maintainable, and flexible code, enabling the creation of various file types without altering the Main class code.
+Thus, the Factory pattern creates a File interface, concrete subclasses (`TextFile`, `ImageFile`, `AudioFile`), and a `FileFactory` class to manage object creation. This results in more modular, maintainable, and flexible code, enabling the creation of various file types without altering the Main class code.
 
 ```java
 // Main class
@@ -207,4 +207,4 @@ public class Main {
 }
 ```
 
-The main class Main creates different types of files using the FileFactory class, and calls the open(), save(), and close() operations on each. In this way, the Factory pattern is used to create different file objects according to the file type.
+The main class Main creates different types of files using the FileFactory class, and calls the `open()`, `save()`, and `close()` operations on each. In this way, the Factory pattern is used to create different file objects according to the file type.

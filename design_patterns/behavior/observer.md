@@ -56,13 +56,13 @@ public class ConcreteObserver {
 }
 ```
 
-The ConcreteSubject and ConcreteObserver classes are directly coupled, which causes the aforementioned problems related to coupling, difficulty in adding or modifying observers and code duplication.
+The `ConcreteSubjec` and `ConcreteObserver` classes are directly coupled, which causes the aforementioned problems related to coupling, difficulty in adding or modifying observers and code duplication.
 
 ## 🙂 Solution
 
-To solve this problem, we can implement the Observer pattern using interfaces for Subject and Observer.
+To solve this problem, we can implement the Observer pattern using interfaces for `Subject` and `Observer`.
 
-This allows decoupling the ConcreteSubject and ConcreteObserver classes, which facilitates the addition or modification of observers and avoids code duplication. The Observer pattern also improves code flexibility and maintainability, since changes to the Subject or Observer will not directly affect the other parts of the code.
+This allows decoupling the `ConcreteSubject` and `ConcreteObserver` classes, which facilitates the addition or modification of observers and avoids code duplication. The Observer pattern also improves code flexibility and maintainability, since changes to the `Subject` or `Observer` will not directly affect the other parts of the code.
 
 ```Java
 // Interfaz Observer
@@ -79,11 +79,11 @@ public interface Subject {
 ```
 
 For this example we have two interfaces:
-Observer and Subject interfaces.
+`Observer` and `Subject` interfaces.
 
-The Observer interface, which defines the update method to be implemented by all observers.
+The `Observer` interface, which defines the update method to be implemented by all observers.
 
-The Subject interface, which defines the methods for adding, removing and notifying observers.
+The `Subject` interface, which defines the methods for adding, removing and notifying observers.
 
 ```java
 public class ConcreteSubject implements Subject {
@@ -118,7 +118,7 @@ public class ConcreteSubject implements Subject {
 }
 ```
 
-The ConcreteSubject class, which implements the Subject interface, maintains a list of observers and notifies all observers when their status changes.
+The `ConcreteSubject` class, which implements the `Subject` interface, maintains a list of observers and notifies all observers when their status changes.
 
 ```java
 public class ConcreteObserver implements Observer {
@@ -135,7 +135,7 @@ public class ConcreteObserver implements Observer {
 }
 ```
 
-The ConcreteObserver class, which implements the Observer interface and performs some action when it receives a notification.
+The `ConcreteObserver` class, which implements the `Observer` interface and performs some action when it receives a notification.
 
 ```java
 public class ObserverPatternExample {
@@ -154,4 +154,4 @@ public class ObserverPatternExample {
 }
 ```
 
-The ObserverPatternExample class contains the main method, which creates an instance of ConcreteSubject, adds two observers and changes the state of the subject to demonstrate how observers are notified.
+The `ObserverPatternExample` class contains the main method, which creates an instance of `ConcreteSubject`, adds two observers and changes the state of the subject to demonstrate how observers are notified.
