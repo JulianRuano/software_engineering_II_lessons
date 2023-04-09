@@ -33,7 +33,7 @@ public class MusicController {
 
 The problem with this code is that if multiple instances of the MusicController object are created in different parts of the game, multiple music tracks can be played at the same time, which can create an unwanted sound effect. Additionally, changing the music track in one instance will not affect the other instances, which can create inconsistencies in the game.
 
-#Solution
+## Solution
 To solve this problem, the Singleton pattern can be used to ensure that there is only one instance of the MusicController object throughout the game. The following code shows how the Singleton pattern can be implemented in Java:
 
 ~~~java
