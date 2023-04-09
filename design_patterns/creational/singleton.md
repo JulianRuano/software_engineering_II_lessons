@@ -6,7 +6,7 @@ The Singleton pattern is a design pattern that is used to ensure that a class ha
 <img src="https://res.cloudinary.com/dilrruxyx/image/upload/v1681007458/singleton_any5uv.png" alt="mypic" width="75%">
 </p>
 
-## Problem
+## 😟 Problem
 Suppose you are developing a game that includes an object to control the game's music. In this case, you want there to be only one instance of the music control object throughout the game, to avoid multiple music tracks playing at the same time. Additionally, you want the instance to be globally accessible to change the music track at any time.
 
 ~~~java
@@ -33,7 +33,7 @@ public class MusicController {
 
 The problem with this code is that if multiple instances of the MusicController object are created in different parts of the game, multiple music tracks can be played at the same time, which can create an unwanted sound effect. Additionally, changing the music track in one instance will not affect the other instances, which can create inconsistencies in the game.
 
-## Solution
+## 🙂 Solution
 To solve this problem, the Singleton pattern can be used to ensure that there is only one instance of the MusicController object throughout the game. The following code shows how the Singleton pattern can be implemented in Java:
 
 ~~~java
