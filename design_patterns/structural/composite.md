@@ -1,10 +1,92 @@
 # Composite pattern
 
-The Composite pattern is a software design pattern used to create hierarchies of objects that represent complex structures in a hierarchical tree. In this pattern, an object can be composed of other objects, which in turn can be composed of other objects, and so on.
+The Composite pattern is a software design pattern that simplifies the creation and management of complex, hierarchical object structures. It allows objects to be composed of other objects, forming a tree-like structure.
 
-The main purpose of the Composite pattern is to treat individual objects and compositions of objects in the same way. This means that clients using the composite object do not need to worry about whether they are working with an individual object or a composition of objects.
+<p align="center">
+<img src="https://res.cloudinary.com/dzxhdnqm4/image/upload/v1681005367/UML_Composite_aqcqxr.png" alt="uml-composite" width="60%">
+</p>
 
-An example of the Composite pattern using Java code could be:
+## 😟 Problem
+
+Imagine you are creating an application to manage restaurant menus, which contain individual menu items and submenus.
+
+Without an appropriate solution, you'll face:
+
+1. A complicated data structure
+2. Difficulties in adding or deleting items and submenus
+3. Inconsistent handling of items and submenus
+
+The code below demonstrates the problem:
+
+```java
+public class MenuItem {
+    private String name;
+    private double price;
+
+    public MenuItem(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void print() {
+        System.out.println(getName() + " $" + getPrice());
+    }
+}
+```
+
+```java
+public class Menu {
+    private List<Object> menuComponents = new ArrayList<>();
+    private String name;
+
+    public Menu(String name) {
+        this.name = name;
+    }
+
+    public void add(Object menuComponent) {
+        menuComponents.add(menuComponent);
+    }
+
+    public void remove(Object menuComponent) {
+        menuComponents.remove(menuComponent);
+    }
+
+    public Object getChild(int index) {
+        return menuComponents.get(index);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void print() {
+        System.out.println(getName());
+        System.out.println("--------------------");
+
+        for (Object menuComponent : menuComponents) {
+            if (menuComponent instanceof MenuItem) {
+                ((MenuItem) menuComponent).print();
+            } else if (menuComponent instanceof Menu) {
+                ((Menu) menuComponent).print();
+            }
+        }
+    }
+}
+```
+
+Here, the `Menu` and `MenuItem` classes are separate and do not share a common interface. This makes it difficult to handle items and submenus consistently and creates a complex data structure that is hard to maintain.
+
+## 🙂 Solution
+
+The Composite pattern addresses these issues by providing a unified way to manage individual and composite items through a common interface and two concrete classes. This enables seamless addition, removal, and interaction of menu items.
 
 ```java
     public interface MenuComponent {
@@ -14,11 +96,9 @@ An example of the Composite pattern using Java code could be:
 }
 ```
 
-Suppose we want to create a menu structure that can have both individual items and composite items. Each menu item can have a name and a price.
+For this example, we create two classes: `MenuItem` for individual items and `Menu` for compound items.
 
-Then, we create two classes, MenuItem for individual items and Menu for compound items.
-
-This is a class to create individual elements (menu items):
+`IndividualMenuItem class`:
 
 ```java
 public class MenuItem implements MenuComponent {
@@ -44,7 +124,7 @@ public class MenuItem implements MenuComponent {
 }
 ```
 
-This is a class to create composite elements :
+`CompositeMenu class:`
 
 ```java
 
@@ -87,7 +167,7 @@ public class Menu implements MenuComponent {
 }
 ```
 
-In the Menu class we create a list of objects that can contain single and compound elements. We use add(), remove(), and getChild() operations to work with this list. The getName() and getPrice() methods get information from the menu. The print() operation is responsible for printing all menu items, whether they are single or compound items.
+In the `Menu` class, we create a list of objects that can contain both single and compound elements. We use `add()`, `remove()`, and `getChild()` operations to manage this list. The `getName()` and `getPrice()` methods retrieve menu information, and the `print()` operation is responsible for printing all menu items, whether they are single or compound items.
 
 ```java
 public class MenuDemo {
@@ -109,9 +189,6 @@ public class MenuDemo {
 }
 ```
 
-Finally, we can use these classes to create a menu that has both individual items and composite items.
+With these classes, we can create a menu containing both individual items and composite items.
 
-<p align="center">
-<img src="https://res.cloudinary.com/dzxhdnqm4/image/upload/v1681005367/UML_Composite_aqcqxr.png" alt="uml-composite" width="60%">
-</p>
-In short, the Composite pattern uses aggregation to build hierarchical structures of composite objects and simplify the handling of individual and composite items in the same way. In the example, the Menu class uses aggregation to build a list of MenuComponent objects to handle both individual and composite menu items.
+In summary, the Composite pattern uses aggregation to build hierarchical structures of composite objects, simplifying the handling of individual and composite items in a uniform manner. In this example, the `Menu` class uses aggregation to build a list of `MenuComponent` objects to handle both individual and composite menu items.
