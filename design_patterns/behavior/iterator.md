@@ -8,7 +8,7 @@ Iterator is a behavioral design pattern that allows you to traverse elements of 
 
 ## 😟 Problem
 
-Imagina que tenemos una estanteria de libros, la cual contiene una lista de libros y queremos acceder a cada uno de los libros de manera correcta y eficiente.
+Imagine that we have a book shelf, which contains a list of books and we want to access each of the books correctly and efficiently.
 
 ```java
 import java.util.ArrayList;
@@ -17,7 +17,6 @@ public class Bookshelf {
 
     private ArrayList<Book> books = new ArrayList<>();
 
-    // Iterates through the ArrayList and returns the next book
     public Book getNextBook() {
         if (!books.isEmpty()) {
             Book book = books.get(0);
@@ -30,14 +29,13 @@ public class Bookshelf {
 }
 ```
 
-En este ejemplo, la clase `Bookshelf` no implementa la interfaz `Iterator` ni proporciona una clase de iterador separada. En su lugar, proporciona un único método llamado `getNextBook()` que itera a través del ArrayList de libros y devuelve el siguiente libro.
+In this example, the `Bookshelf` class does not implement the `Iterator` interface nor does it provide a separate iterator class. Instead, it provides a single method called `getNextBook()` that iterates through the ArrayList of books and returns the next book.
 
-Esta implementación viola el patrón Iterator porque no proporciona una manera segura y consistente de iterar a través de la lista de libros. Por ejemplo, si el código llamante llama a `getNextBook()` más veces de lo que hay libros en la lista, el método devolverá `null` y el código llamante puede tener errores de tiempo de ejecución. Además, esta implementación no permite iterar sobre la lista en orden inverso o modificarla mientras se está iterando.
+This implementation violates the Iterator pattern because it does not provide a safe and consistent way to iterate through the ArrayList of books. For example, if the calling code calls `getNextBook()` more times than there are books in the list, the method will return `null` and the calling code may have run-time errors. Also, this implementation does not allow iterating over the list in reverse order or modifying the list while iterating.
 
 ## 🙂 Solution
 
-Para solucionar esto, se debería implementar una interfaz `Iterator` separada para la clase `Bookshelf`, con los métodos estándar `hasNext()`, `next()` y `remove()` para iterar de forma segura a través de la lista de libros.
-
+To solve this, a separate `Iterator` interface should be implemented for the `Bookshelf` class, with the standard `hasNext()`, `next()` and `remove()` methods to iterate safely through the list of books.
 ```java
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -46,7 +44,6 @@ public class Bookshelf implements Iterable<Book> {
 
     private ArrayList<Book> books = new ArrayList<>();
 
-    // Implementa la interfaz Iterator con una clase interna
     private class BookIterator implements Iterator<Book> {
         private int index = 0;
 
@@ -64,13 +61,12 @@ public class Bookshelf implements Iterable<Book> {
         }
     }
 
-    // Devuelve una instancia del iterador interno
     public Iterator<Book> iterator() {
         return new BookIterator();
     }
 }
 ```
-En esta implementación, la clase `Bookshelf` implementa la interfaz `Iterable` y proporciona una clase interna llamada `BookIterator` que implementa la interfaz `Iterator`. La clase `BookIterator` tiene los métodos estándar `hasNext()`, `next()` y `remove()` para iterar de forma segura a través de la lista de libros.
+In this implementation, the `Bookshelf` class implements the `Iterable` interface and provides an inner class called `BookIterator` that implements the `Iterator` interface. The `BookIterator` class has the standard `hasNext()`, `next()` and `remove()` methods to iterate safely through the list of books.
 
-El método `iterator()` de la clase `Bookshelf` devuelve una instancia de la clase interna `BookIterator`, lo que permite que el código llamante itere de forma segura a través de la lista de libros utilizando un bucle `for-each` u otro enfoque de iteración.
+The `iterator()` method of the `Bookshelf` class returns an instance of the `BookIterator` inner class, allowing the calling code to iterate safely through the list of books using a `for-each` loop or other iteration approach.
 
