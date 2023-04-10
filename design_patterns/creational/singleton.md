@@ -1,7 +1,10 @@
 # Singleton pattern
 
-The Singleton pattern is a design pattern that is used to ensure that a class has only one instance and provides a global access point to that instance. This is useful in situations where you want to avoid creating multiple instances of a class and want to ensure that only one instance is used throughout the system.
+The Singleton pattern is a design pattern used to ensure that a class has only one instance and to provide a global access point to that instance. Its intention is to guarantee that a class has only one instance and to provide a global access point to it. The pattern is implemented by creating a method in our class that creates an instance of the object only if it does not already exist. To ensure that the class cannot be instantiated again, the constructor's scope is controlled (using access modifiers such as protected or private).
 
+- Create a private constructor to prevent an instance of the class from being created from outside the class.
+- Create a private and static variable of the same class that will be the only instance of the class.
+- Create a public and static method that returns the only instance of the class created in step 2.
 <p align="center">
 <img src="https://res.cloudinary.com/dilrruxyx/image/upload/v1681007458/singleton_any5uv.png" alt="mypic" width="75%">
 </p>
