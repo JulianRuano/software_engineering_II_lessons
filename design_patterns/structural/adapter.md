@@ -7,6 +7,7 @@ This pattern is particularly valuable when there is a need to combine existing c
 <p align="center">
 <img src="https://res.cloudinary.com/dzxhdnqm4/image/upload/v1681170223/uml_adapter_lps08h.png" alt="uml-composite" width="75%">
 </p>
+
 ## 😟 Problem
 
 Imagine you are developing an application that uses a third-party library for processing payments. The library has a specific interface for processing payments, but your application uses a different interface.
