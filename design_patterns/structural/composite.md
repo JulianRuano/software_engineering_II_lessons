@@ -1,6 +1,8 @@
 # Composite pattern
 
-The Composite pattern is a software design pattern that simplifies the creation and management of complex, hierarchical object structures. It allows objects to be composed of other objects, forming a tree-like structure.
+The Composite pattern is a powerful and versatile software design pattern that streamlines the creation, organization, and management of intricate, hierarchical object structures within an application.
+
+This pattern is particularly useful in scenarios where an application needs to handle both individual objects and groups of objects in a uniform manner, as it allows objects to be composed of other objects, ultimately forming a tree-like structure.
 
 <p align="center">
 <img src="https://res.cloudinary.com/dzxhdnqm4/image/upload/v1681005367/UML_Composite_aqcqxr.png" alt="uml-composite" width="60%">
@@ -82,11 +84,13 @@ public class Menu {
 }
 ```
 
-Here, the `Menu` and `MenuItem` classes are separate and do not share a common interface. This makes it difficult to handle items and submenus consistently and creates a complex data structure that is hard to maintain.
+In this example, the `Menu` and `MenuItem` classes are separate and do not share a common interface. This makes it difficult to handle items and submenus consistently and creates a complex data structure that is hard to maintain.
 
 ## 🙂 Solution
 
 The Composite pattern addresses these issues by providing a unified way to manage individual and composite items through a common interface and two concrete classes. This enables seamless addition, removal, and interaction of menu items.
+
+Here is an implementation of the Composite pattern in Java:
 
 ```java
     public interface MenuComponent {
@@ -96,31 +100,11 @@ The Composite pattern addresses these issues by providing a unified way to manag
 }
 ```
 
-For this example, we create two classes: `MenuItem` for individual items and `Menu` for compound items.
-
 `IndividualMenuItem class`:
 
 ```java
 public class MenuItem implements MenuComponent {
-    private String name;
-    private double price;
-
-    public MenuItem(String name, double price) {
-        this.name = name;
-        this.price = price;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void print() {
-        System.out.println(getName() + " $" + getPrice());
-    }
+    // ...
 }
 ```
 
@@ -129,32 +113,9 @@ public class MenuItem implements MenuComponent {
 ```java
 
 public class Menu implements MenuComponent {
-    private List<MenuComponent> menuComponents = new ArrayList<>();
-    private String name;
+    private List<Object> menuComponents = new ArrayList<>();
 
-    public Menu(String name) {
-        this.name = name;
-    }
-
-    public void add(MenuComponent menuComponent) {
-        menuComponents.add(menuComponent);
-    }
-
-    public void remove(MenuComponent menuComponent) {
-        menuComponents.remove(menuComponent);
-    }
-
-    public MenuComponent getChild(int index) {
-        return menuComponents.get(index);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        throw new UnsupportedOperationException();
-    }
+    // ...
 
     public void print() {
         System.out.println(getName());
@@ -167,7 +128,9 @@ public class Menu implements MenuComponent {
 }
 ```
 
-In the `Menu` class, we create a list of objects that can contain both single and compound elements. We use `add()`, `remove()`, and `getChild()` operations to manage this list. The `getName()` and `getPrice()` methods retrieve menu information, and the `print()` operation is responsible for printing all menu items, whether they are single or compound items.
+In the `Menu` class, we create a list of `MenuComponen`t objects that can contain both `MenuItem` and `Menu` instances. This list can be easily managed, allowing for the retrieval of menu information and the printing of all menu items and their respective submenus, regardless of whether they are individual items or composite items.
+
+The interface `MenuComponent` serves as a common contract for both individual and composite menu items, ensuring consistent handling of both types of elements.
 
 ```java
 public class MenuDemo {

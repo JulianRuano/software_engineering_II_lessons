@@ -56,7 +56,7 @@ public class ConcreteObserver {
 }
 ```
 
-The `ConcreteSubjec` and `ConcreteObserver` classes are directly coupled, which causes the aforementioned problems related to coupling, difficulty in adding or modifying observers and code duplication.
+The `ConcreteSubject` and `ConcreteObserver` classes are directly coupled, which causes the aforementioned problems related to coupling, difficulty in adding or modifying observers and code duplication.
 
 ## 🙂 Solution
 
