@@ -1,98 +1,93 @@
 ## Single Responsibility
 
-The Single Responsibility Principle states that a class should have only one responsibility, meaning that there should only be one reason for the class to change.
+The Single Responsibility Principle (SRP) states that a class should have only one reason to change. In other words, a class should have only one responsibility or job to do, the problem it aims to solve is that a class, interface or module with multiple responsibilities is difficult to understand, test, and maintain, the way it tries to solve it is by designing classes, interfaces and modules that have only one responsibility, meaning that they have only one reason to change.
+
+The benefits that it brings are:
+- Improved maintainability
+- Easier testing
+- Promotes better organization and modularity of code.
 
 ### Bad example:
 
-~~~java
+Suppose you have a class called `Student` that has the responsibility of managing student information and calculating their grades. 
+
+``` java
 public class Student {
-    private String name;
-    private int age;
-    private double grade;
+	private String name;
+	private int age;
+	private int grade;
 
-    public Student(String name, int age, double grade) {
-        this.name = name;
-        this.age = age;
-        this.grade = grade;
-    }
+	public Student(String name, int age, int grade) {
+		this.name = name;
+		this.age = age;
+		this.grade = grade;
+	}
 
-    public void printData() {
-        System.out.println("Name: " + this.name);
-        System.out.println("Age: " + this.age);
-        System.out.println("Grade: " + this.grade);
-    }
+	// getters and setters
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void updateData(String name, int age, double grade) {
-        this.name = name;
-        this.age = age;
-        this.grade = grade;
-    }
+	public void setAge(int age) {
+		this.age = age;
+	}
 
-    public void saveData() {
-        // Code to save student data in a database
-    }
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
 
-    public void sendEmail(String message) {
-        // Code to send an email to the student
-    }
+	public double calculateGPA() {
+		// logic to calculate GPA
+	}
 }
-~~~
 
-In this example, the Student class has multiple responsibilities: printing student data, updating student data, saving student data to a database, and sending an email to the student. This makes the class difficult to maintain and extend.
+```
 
+This code violates the SRP because the `Student` class has two responsibilities: managing student information and calculating grades. If either of these responsibilities changes, we would need to modify the `Student` class, which violates the SRP.
+>>>>>>> 552c2b5b65ceb0664effcbe53806917b05656103
 
 ### Good example:
+To apply the SRP, we can create two separate classes: `Student` for managing student information and `GradeCalculator` for calculating grades. This way, each class has only one responsibility and can be changed independently of the other:
 
-~~~java
+
+``` java
 public class Student {
-    private String name;
-    private int age;
-    private double grade;
+	private String name;
+	private int age;
 
-    public Student(String name, int age, double grade) {
-        this.name = name;
-        this.age = age;
-        this.grade = grade;
-    }
+	public Student(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
 
-    public void printData() {
-        System.out.println("Name: " + this.name);
-        System.out.println("Age: " + this.age);
-        System.out.println("Grade: " + this.grade);
-    }
+	// getters and setters
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void updateData(String name, int age, double grade) {
-        this.name = name;
-        this.age = age;
-        this.grade = grade;
-    }
+	public void setAge(int age) {
+		this.age = age;
+	}
 }
 
-class StudentDAO {
-    public void saveData(Student student) {
-        // Code to save student data in a database
-    }
+public class GradeCalculator {
+	public double calculateGPA(Student student) {
+		// logic to calculate GPA
+	}
 }
 
-class EmailSender {
-    public void sendEmail(String recipient, String message) {
-        // Code to send an email to the recipient
-    }
-}
-~~~
-
-In this example, the Student class only has the responsibility of representing a student and handling the updating of their data. Two additional classes have been created to handle the responsibilities of saving student data to a database and sending emails. The StudentDAO class is responsible for saving student data to a database, while the EmailSender class is responsible for sending emails. This way, each class has only one responsibility, making them easy to maintain and extend.
-
-
+```
+This code separates the responsibilities of managing student information and calculating grades into two separate classes, Student and GradeCalculator, respectively.
 ### Related principles
 
 * [Separation of Concerns](../general/separationofconcerns.md)
 * [Composition Over Inheritance](../general/compositionoverinheritance.md)
 * [KISS (Keep It Simple, Stupid)](../general/kiss.md)
 
+
 ### Related patterns
 
 - [Pattern names]
 
----
+
 [Back to the list](./README.md)

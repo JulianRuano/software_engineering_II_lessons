@@ -1,60 +1,95 @@
 ## Dependency Injection
 
-Dependency Injection is a design pattern used in object-oriented programming to decouple dependencies between objects. Instead of an object creating and maintaining its own dependencies, the dependencies are provided by an external object.
+The dependency injection principle suggests that objects should receive dependencies from external sources instead of creating them internally, the problem that it solves is the tight coupling between objects and their dependencies, it does it by supplying its dependencies from an external source, the benefits of applying this are that the classes that receive those dependencies do not need to know how they are implemented, thus decoupling the interaction of them.
 
 ### Bad example
 
-~~~java
-public class MyClass {
-    private Connection database;
+Suppose you have a UserService class that requires a UserRepository object to perform database operations. Instead of injecting the dependency, the UserService class creates the UserRepository object internally:
+``` java
+public class UserService {
+	private UserRepository userRepository = new UserRepository();
 
-    public MyClass() {
-        this.database = // code to create database connection
-    }
 
-    public void myMethod() {
-        // use this.database to perform operations on the database
-    }
+	public void addUser(User user) {
+		userRepository.save(user);
+	}
+
+	public User getUser(String email) {
+		return userRepository.findByEmail(email);
+	}
 }
-~~~
 
-In this example, the MyClass class depends on a global instance of the database connection. This makes the MyClass class less modular and harder to test, as the database connection cannot be replaced with a fake connection during testing. Additionally, the global instance can cause concurrency issues in multi-user applications.
-
+```
+In this example, the UserService class is tightly coupled to the UserRepository class. If the implementation of the UserRepository changes, the UserService class would also need to change.
 ### Good example
 
-~~~java
-public class Database {
-    private Connection connection;
+To apply the Dependency Injection principle, you would inject the UserRepository dependency into the UserService class using an interface (we'll discuss why later):
+``` java
 
-    public Database() {
-        this.connection = // code to create database connection
-    }
+public interface IUserRepository{
+	boolean save(User user);
+	User findByEmail(String email);
+
+}
+public class UserService {
+	private IUserRepository userRepository;
+
+	public UserService(IUserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
+	public boolean addUser(User user) {
+		return userRepository.save(user);
+	}
+
+	public User getUser(String email) {
+		return userRepository.findByEmail(email);
+	}
 }
 
-public class MyClass {
-    private Database database;
+```
 
-    public MyClass(Database database) {
-        this.database = database;
-    }
+In this example, the `IUserRepository` dependency is passed in through the constructor of the `UserService` class. If the implementation of the class that implements `IUserRepository` changes, only the code of the class that implements `IUserRepository`  needs to be modified, using interfaces is a better option because you can do thigs like this:
 
-    public void myMethod() {
-        // use this.database to perform operations on the database
-    }
-}
 
-~~~
+``` java
+	public class OracleUserRepository implements IUserRespository{
+		@Override
+		boolean save(User user){
+			// Do Something with user and return something
+		}
 
-In this example, the MyClass class depends on the Database class to perform operations on the database. Instead of creating the database connection within the MyClass class, Dependency Injection is used to provide the connection from the outside. This makes the MyClass class more modular and easier to test, as the database connection can be replaced with a fake connection during testing.
+		@Override
+		User findByEmail(String email){
+			// Do something with email and return something
+		}
+	}
+
+	public class MongoUserRepository implements IUserRespository{
+		@Override
+		boolean save(User user){
+			// Do Something with user and return something
+		}
+
+		@Override
+		User findByEmail(String email){
+			// Do something with email and return something
+		}
+	}	
+
+```
+This allows you to easily inject an implementation of those databases as dependency of the `UserService` class, thus allowing you to write code without modifying the class itself.
+
+
 
 ### Related principles
 
-* [Separation of Concerns](../general/separationofconcerns.md)
-* [Composition Over Inheritance](../general/compositionoverinheritance.md)
+- [Composition over inheritance](../general/compositionoverinheritance.md).
+
 
 ### Related patterns
 
 - [Pattern names]
 
----
+
 [Back to the list](./README.md)

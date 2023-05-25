@@ -1,79 +1,63 @@
 ## Interface Segregation
-
-It is a design principle that states that a class should not depend on interfaces that it does not use. That is, a class should have a specific interface that corresponds exactly to the needs of the clients that use it.
-
+The Interface Segregation Principle (ISP) states that classes should not be forced to depend on interfaces they do not use. This principle emphasizes that interfaces should be designed to be cohesive and focused on a specific set of related functions, the problem that it aims to solve is the creation of large and bloated interfaces that force the implementation of unnecessary methods, the way it solves this problem is by promoting the creation of interfaces that are specific to the needs of the classes that will use them, the benefits that it brings are a better maintainabilty (the interfaces are smaller), extensibility, and testability (the code is more isolated)
 
 ### Bad example:
 
-~~~java
-interface IPrinter {
-    void print();
-    void scan();
-    void copy();
-    void fax();
+Suppose you have an interface for a shape, which includes methods for calculating area and perimeter:
+``` java
+public interface Shape {
+    double calculateArea();
+    double calculatePerimeter();
 }
 
-class LaserPrinter implements IPrinter {
-    // Implements all IPrinter methods, even if not needed
+```
+Now suppose you have a class that only needs to calculate the area of a shape, but does not need to calculate its perimeter. This class is forced to implement both methods of the `Shape` interface, even though it only needs one:
+``` java
+public class AreaCalculator {
+    public double calculateArea(Shape shape) {
+        return shape.calculateArea();
+    }
 }
 
-class InkjetPrinter implements IPrinter {
-    // Implements all IPrinter methods, even if not needed
-}
+```
 
-class FaxMachine implements IPrinter {
-    // Implements all IPrinter methods, even if not needed
-}
-
-~~~
-In this example, all classes implement all methods of the IPrinter interface, even if they don't need them. This makes the code less modular and harder to maintain, as classes have unnecessary dependencies on the IPrinter interface. If the IPrinter interface is changed to add a new method that is not relevant to printers, then all classes will be affected by this addition. It is better to avoid implementing unnecessary interfaces.
-
-</br>
+This violates the ISP, as the `AreaCalculator` class is forced to depend on the entire `Shape` interface, even though it only needs the `calculateArea()` method.
 
 ### Good example:
 
+To apply the ISP, you must design smaller and more focused interfaces that are specific to the needs of each class that needs it:
+``` java
+public interface Area {
+    double calculateArea();
+}
+>>>>>>> 552c2b5b65ceb0664effcbe53806917b05656103
 
-~~~java
-interface IPrint {
-    void print();
+public interface Perimeter {
+    double calculatePerimeter();
 }
 
-interface IScan {
-    void scan();
+```
+
+Now the `Shape` interface can be refactored to implement these smaller interfaces, allowing classes to depend only on the interfaces they need:
+
+``` java
+public interface Shape extends Area, Perimeter {
 }
 
-interface ICopy {
-    void copy();
+public class AreaCalculator {
+    public double calculateArea(Area shape) {
+        return shape.calculateArea();
+    }
 }
 
-interface IFax {
-    void fax();
-}
+```
 
-class LaserPrinter implements IPrint, ICopy {
-    // Implements only IPrint and ICopy methods
-}
-
-class InkjetPrinter implements IPrint, IScan, ICopy {
-    // Implements only IPrint, IScan, and ICopy methods
-}
-
-class FaxMachine implements IPrint, IFax {
-    // Implements only IPrint and IFax methods
-}
-~~~
-
-In this example, each type of printer implements only the interfaces it needs, which makes the code more modular and easier to maintain.
-
+This code separates the `Shape` interface into smaller, more focused interfaces that classes can depend on independently.
 ### Related principles
 
 * [Separation of Concerns](../general/separationofconcerns.md)
 * [Composition Over Inheritance](../general/compositionoverinheritance.md)
 * [KISS (Keep It Simple, Stupid)](../general/kiss.md)
 
-### Related patterns
 
-- [Pattern names]
-
----
 [Back to the list](./README.md)
